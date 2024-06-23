@@ -6,6 +6,31 @@
 </head>
 
 <body>
+    <div id="modalLOG" class="modal">
+        <div class="modalLOG-content">
+            <p>Some text in the Modal..</p>
+            <form id="formlog" class="login">
+                
+                <span id="noticeLOG" class="false">USER/PASSW NOT FOUND</span>
+                <label for="user">username:</label>
+                <input id="user" type="text">
+                <label for="pass">password:</label>
+                <input id="pass" type="password">
+                <input type="submit" value="Login">
+            </form>
+            <form action="/REG" method="post" class="regis">
+                <label for="usereg">username:</label>
+                <input id="usereg" type="text">
+                <label for="passreg">password:</label>
+                <input id="passreg" type="password">
+                <label for="pass2">password^2</label>
+                <input id="pass2" type="password">
+                <input type="submit" value="Register">
+            </form>
+            <button onclick="reg()" class="login">im new here!</button>
+            <button onclick="pass()" class="login">forgot my pass!</button>
+          </div>
+    </div>
     <div id="MD">
         <div id="OPT" class="left">
             <div id="menu" class="left">
@@ -122,6 +147,36 @@
             </div>
         </div>
     </div>
+    <script>
+        var log = '<%=log%>';
+
+
+        document.getElementById("formlog").addEventListener("submit", function(e){
+            e.preventDefault();
+            let user = document.getElementById("user").value;
+            let passw = document.getElementById("pass").value;
+            console.log(user);
+            console.log(passw);
+            fetch('/LOG', {method: 'POST',
+            headers: {
+                Authorization: 'chessg',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({user, passw})})
+        }) .then(res.render)
+        
+
+        function reg(){
+            var logs = document.getElementsByClassName('login');
+            var regs = document.getElementsByClassName('regis');
+            for(i=0;i<logs.length;i++){
+                logs[i].style.display = "none";
+            }
+            for(i=0;i<regs.length;i++){
+                regs[i].style.display = "block";
+            }
+        }
+    </script>
 </body>
 
 </html>
